@@ -1,91 +1,91 @@
 #!/bin/bash
 
 declare -A tips=(
-    ["h_check_os_valid"]='{"en":"Current operating system","ua":"Поточна операційна система","ru":"Текущая операционная система","es":"Sistema operativo actual"}'
-    ["h_check_os_wrong"]='{"en":"This script only supports Ubuntu20+ operating systems","ua":"Цей скрипт підтримує тільки операційні системи Ubuntu20+","ru":"Этот скрипт поддерживает только операционные системы Ubuntu20+","es":"Este script solo es compatible con los sistemas operativos Ubuntu20+"}'
-    ["h_check_arch_wrong"]='{"en":"This script only supports AMD64 and ARM architectures","ua":"Цей скрипт підтримує тільки архітектури AMD64 і ARM","ru":"Этот скрипт поддерживает только архитектуры AMD64 и ARM","es":"Este script solo es compatible con las arquitecturas AMD64 y ARM"}'
-    ["h_check_arch_valid"]='{"en":"Current architecture","ua":"Поточна архітектура","ru":"Текущая архитектура","es":"Arquitectura actual"}'
+    ["h_check_os_valid"]='{"en":"Current operating system","ua":"РџРѕС‚РѕС‡РЅР° РѕРїРµСЂР°С†С–Р№РЅР° СЃРёСЃС‚РµРјР°","ru":"РўРµРєСѓС‰Р°СЏ РѕРїРµСЂР°С†РёРѕРЅРЅР°СЏ СЃРёСЃС‚РµРјР°","es":"Sistema operativo actual"}'
+    ["h_check_os_wrong"]='{"en":"This script only supports Ubuntu20+ operating systems","ua":"Р¦РµР№ СЃРєСЂРёРїС‚ РїС–РґС‚СЂРёРјСѓС” С‚С–Р»СЊРєРё РѕРїРµСЂР°С†С–Р№РЅС– СЃРёСЃС‚РµРјРё Ubuntu20+","ru":"Р­С‚РѕС‚ СЃРєСЂРёРїС‚ РїРѕРґРґРµСЂР¶РёРІР°РµС‚ С‚РѕР»СЊРєРѕ РѕРїРµСЂР°С†РёРѕРЅРЅС‹Рµ СЃРёСЃС‚РµРјС‹ Ubuntu20+","es":"Este script solo es compatible con los sistemas operativos Ubuntu20+"}'
+    ["h_check_arch_wrong"]='{"en":"This script only supports AMD64 and ARM architectures","ua":"Р¦РµР№ СЃРєСЂРёРїС‚ РїС–РґС‚СЂРёРјСѓС” С‚С–Р»СЊРєРё Р°СЂС…С–С‚РµРєС‚СѓСЂРё AMD64 С– ARM","ru":"Р­С‚РѕС‚ СЃРєСЂРёРїС‚ РїРѕРґРґРµСЂР¶РёРІР°РµС‚ С‚РѕР»СЊРєРѕ Р°СЂС…РёС‚РµРєС‚СѓСЂС‹ AMD64 Рё ARM","es":"Este script solo es compatible con las arquitecturas AMD64 y ARM"}'
+    ["h_check_arch_valid"]='{"en":"Current architecture","ua":"РџРѕС‚РѕС‡РЅР° Р°СЂС…С–С‚РµРєС‚СѓСЂР°","ru":"РўРµРєСѓС‰Р°СЏ Р°СЂС…РёС‚РµРєС‚СѓСЂР°","es":"Arquitectura actual"}'
 
-    ["h_check_root_wrong"]='{"en":"This script must be run as root","ua":"Цей скрипт має бути виконаний від імені користувача root","ru":"Этот скрипт должен выполнятся от пользователя root","es":"Este script debe ejecutarse como root"}'
+    ["h_check_root_wrong"]='{"en":"This script must be run as root","ua":"Р¦РµР№ СЃРєСЂРёРїС‚ РјР°С” Р±СѓС‚Рё РІРёРєРѕРЅР°РЅРёР№ РІС–Рґ С–РјРµРЅС– РєРѕСЂРёСЃС‚СѓРІР°С‡Р° root","ru":"Р­С‚РѕС‚ СЃРєСЂРёРїС‚ РґРѕР»Р¶РµРЅ РІС‹РїРѕР»РЅСЏС‚СЃСЏ РѕС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ root","es":"Este script debe ejecutarse como root"}'
 
-    ["h_exit"]='{"en":"Installation caneled.","ua":"Встановлення скасовано.","ru":"Установка отменена.","es":"Instalacion cancelada."}'
+    ["h_exit"]='{"en":"Installation caneled.","ua":"Р’СЃС‚Р°РЅРѕРІР»РµРЅРЅСЏ СЃРєР°СЃРѕРІР°РЅРѕ.","ru":"РЈСЃС‚Р°РЅРѕРІРєР° РѕС‚РјРµРЅРµРЅР°.","es":"InstalaciГіn cancelada."}'
 
     # log messages
-    ["h_msg_info"]='{"en":"Info","ua":"Інформація","ru":"Информация","es":"Info"}'
-    ["h_msg_warning"]='{"en":"Warning","ua":"Попередження","ru":"Предупреждение","es":"Advertencia"}'
-    ["h_msg_error"]='{"en":"Script stopped with an Error","ua":"Скрипт зупинено з Помилкою","ru":"Скрипт остановлен с Ошибкой","es":"Script detenido con un Error"}'
+    ["h_msg_info"]='{"en":"Info","ua":"Р†РЅС„РѕСЂРјР°С†С–СЏ","ru":"РРЅС„РѕСЂРјР°С†РёСЏ","es":"Info"}'
+    ["h_msg_warning"]='{"en":"Warning","ua":"РџРѕРїРµСЂРµРґР¶РµРЅРЅСЏ","ru":"РџСЂРµРґСѓРїСЂРµР¶РґРµРЅРёРµ","es":"Advertencia"}'
+    ["h_msg_error"]='{"en":"Script stopped with an Error","ua":"РЎРєСЂРёРїС‚ Р·СѓРїРёРЅРµРЅРѕ Р· РџРѕРјРёР»РєРѕСЋ","ru":"РЎРєСЂРёРїС‚ РѕСЃС‚Р°РЅРѕРІР»РµРЅ СЃ РћС€РёР±РєРѕР№","es":"Script detenido con un Error"}'
 
-    ["h_msg_start"]='{"en":"Start","ua":"Запуск","ru":"Запуск","es":"Inicio"}'
-    ["h_msg_success"]='{"en":"Success","ua":"Успіх","ru":"Успех","es":"Exito"}'
+    ["h_msg_start"]='{"en":"Start","ua":"Р—Р°РїСѓСЃРє","ru":"Р—Р°РїСѓСЃРє","es":"Inicio"}'
+    ["h_msg_success"]='{"en":"Success","ua":"РЈСЃРїС–С…","ru":"РЈСЃРїРµС…","es":"Г‰xito"}'
 
-    ["h_msg_example"]='{"en":"Example","ua":"Приклад","ru":"Пример","es":"Ejemplo"}'
-    ["h_msg_hint"]='{"en":"Hint","ua":"Підказка","ru":"Подсказка","es":"Sugerencia"}'
-    ["h_msg_select"]='{"en":"Select","ua":"Вибір","ru":"Выбор","es":"Seleccionar"}'
+    ["h_msg_example"]='{"en":"Example","ua":"РџСЂРёРєР»Р°Рґ","ru":"РџСЂРёРјРµСЂ","es":"Ejemplo"}'
+    ["h_msg_hint"]='{"en":"Hint","ua":"РџС–РґРєР°Р·РєР°","ru":"РџРѕРґСЃРєР°Р·РєР°","es":"Sugerencia"}'
+    ["h_msg_select"]='{"en":"Select","ua":"Р’РёР±С–СЂ","ru":"Р’С‹Р±РѕСЂ","es":"Seleccionar"}'
 
     # setup messages
-    ["h_setup_install_text"]='{"en":"Select installation option","ua":"Оберіть варіант встановлення","ru":"Выберите вариант установки","es":"Seleccione una opcion de instalacion"}'
-    ["h_setup_tips"]='{"en":"Use numbers to toggle, Enter to confirm, Q to exit.","ua":"Використовуйте цифри для перемикання, Enter для підтвердження, Q для виходу.","ru":"Используйте цифры для переключения, Enter для подтверждения, Q для выхода.","es":"Use numeros para alternar, Enter para confirmar, Q para salir."}'
-    ["h_custom_setup_request"]='{"en": "Custom installation setup:","ua": "Налаштування користувацького встановлення:","ru": "Настройка пользовательской установки:","es": "Configuracion de instalacion personalizada:"}'
+    ["h_setup_install_text"]='{"en":"Select installation option","ua":"РћР±РµСЂС–С‚СЊ РІР°СЂС–Р°РЅС‚ РІСЃС‚Р°РЅРѕРІР»РµРЅРЅСЏ","ru":"Р’С‹Р±РµСЂРёС‚Рµ РІР°СЂРёР°РЅС‚ СѓСЃС‚Р°РЅРѕРІРєРё","es":"Seleccione una opciГіn de instalaciГіn"}'
+    ["h_setup_tips"]='{"en":"Use numbers to toggle, Enter to confirm, Q to exit.","ua":"Р’РёРєРѕСЂРёСЃС‚РѕРІСѓР№С‚Рµ С†РёС„СЂРё РґР»СЏ РїРµСЂРµРјРёРєР°РЅРЅСЏ, Enter РґР»СЏ РїС–РґС‚РІРµСЂРґР¶РµРЅРЅСЏ, Q РґР»СЏ РІРёС…РѕРґСѓ.","ru":"РСЃРїРѕР»СЊР·СѓР№С‚Рµ С†РёС„СЂС‹ РґР»СЏ РїРµСЂРµРєР»СЋС‡РµРЅРёСЏ, Enter РґР»СЏ РїРѕРґС‚РІРµСЂР¶РґРµРЅРёСЏ, Q РґР»СЏ РІС‹С…РѕРґР°.","es":"Use nГєmeros para alternar, Enter para confirmar, Q para salir."}'
+    ["h_custom_setup_request"]='{"en": "Custom installation setup:","ua": "РќР°Р»Р°С€С‚СѓРІР°РЅРЅСЏ РєРѕСЂРёСЃС‚СѓРІР°С†СЊРєРѕРіРѕ РІСЃС‚Р°РЅРѕРІР»РµРЅРЅСЏ:","ru": "РќР°СЃС‚СЂРѕР№РєР° РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРѕР№ СѓСЃС‚Р°РЅРѕРІРєРё:","es": "ConfiguraciГіn de instalaciГіn personalizada:"}'
 
     # select messages
-    ["h_select_installation_title"]='{"en":"Choose an installation option","ua":"Оберіть варіант встановлення","ru":"Выберите вариант установки","es":"Elija una opcion de instalacion"}'
-    ["h_select_installation_dropbox"]='{"en":"Installation using https://www.dropbox.com/","ua":"Встановлення за допомогою https://www.dropbox.com/","ru":"Установка с использованием https://www.dropbox.com/","es":"Instalacion usando https://www.dropbox.com/"}'
-    ["h_select_installation_dropbox_link"]='{"en":"Insert link","ua":"Вставте посилання","ru":"Вставьте ссылку","es":"Insertar enlace"}'
-    ["h_select_installation_dropbox_link_wrong"]='{"en":"Invalid link, please try again","ua":"Невірне посилання, спробуйте ще раз","ru":"Неправильная ссылка, попробуйте еще раз","es":"Enlace no valido, por favor intentelo de nuevo"}'
-    ["h_select_installation_type"]='{"en":"Selected installation type","ua":"Вибраний тип встановлення","ru":"Выбранный тип установки","es":"Tipo de instalacion seleccionado"}'
-    ["h_select_installation_link"]='{"en":"Link to installation archive","ua":"Посилання на інсталяційний архів","ru":"Ссылка на установочный архив","es":"Enlace al archivo de instalacion"}'
+    ["h_select_installation_title"]='{"en":"Choose an installation option","ua":"РћР±РµСЂС–С‚СЊ РІР°СЂС–Р°РЅС‚ РІСЃС‚Р°РЅРѕРІР»РµРЅРЅСЏ","ru":"Р’С‹Р±РµСЂРёС‚Рµ РІР°СЂРёР°РЅС‚ СѓСЃС‚Р°РЅРѕРІРєРё","es":"Elija una opciГіn de instalaciГіn"}'
+    ["h_select_installation_dropbox"]='{"en":"Installation using https://www.dropbox.com/","ua":"Р’СЃС‚Р°РЅРѕРІР»РµРЅРЅСЏ Р·Р° РґРѕРїРѕРјРѕРіРѕСЋ https://www.dropbox.com/","ru":"РЈСЃС‚Р°РЅРѕРІРєР° СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј https://www.dropbox.com/","es":"InstalaciГіn usando https://www.dropbox.com/"}'
+    ["h_select_installation_dropbox_link"]='{"en":"Insert link","ua":"Р’СЃС‚Р°РІС‚Рµ РїРѕСЃРёР»Р°РЅРЅСЏ","ru":"Р’СЃС‚Р°РІСЊС‚Рµ СЃСЃС‹Р»РєСѓ","es":"Insertar enlace"}'
+    ["h_select_installation_dropbox_link_wrong"]='{"en":"Invalid link, please try again","ua":"РќРµРІС–СЂРЅРµ РїРѕСЃРёР»Р°РЅРЅСЏ, СЃРїСЂРѕР±СѓР№С‚Рµ С‰Рµ СЂР°Р·","ru":"РќРµРїСЂР°РІРёР»СЊРЅР°СЏ СЃСЃС‹Р»РєР°, РїРѕРїСЂРѕР±СѓР№С‚Рµ РµС‰Рµ СЂР°Р·","es":"Enlace no vГЎlido, por favor intГ©ntelo de nuevo"}'
+    ["h_select_installation_type"]='{"en":"Selected installation type","ua":"Р’РёР±СЂР°РЅРёР№ С‚РёРї РІСЃС‚Р°РЅРѕРІР»РµРЅРЅСЏ","ru":"Р’С‹Р±СЂР°РЅРЅС‹Р№ С‚РёРї СѓСЃС‚Р°РЅРѕРІРєРё","es":"Tipo de instalaciГіn seleccionado"}'
+    ["h_select_installation_link"]='{"en":"Link to installation archive","ua":"РџРѕСЃРёР»Р°РЅРЅСЏ РЅР° С–РЅСЃС‚Р°Р»СЏС†С–Р№РЅРёР№ Р°СЂС…С–РІ","ru":"РЎСЃС‹Р»РєР° РЅР° СѓСЃС‚Р°РЅРѕРІРѕС‡РЅС‹Р№ Р°СЂС…РёРІ","es":"Enlace al archivo de instalaciГіn"}'
 
-    ["h_install_packages_title"]='{"en":"Installing necessary packages and dependencies","ua":"Встановлення необхідних пакетів та залежностей","ru":"Установка необходимых пакетов и зависимостей","es":"Instalando paquetes y dependencias necesarios"}'
-    ["h_install_packages_start"]='{"en":"Installation","ua":"Встановлення","ru":"Установка","es":"Instalacion"}'
-    ["h_install_packages_comlpete"]='{"en":"Installation successful","ua":"Встановлення успішне","ru":"Установка успешна","es":"Instalacion exitosa"}'
-    ["h_install_packages_already"]='{"en":"Already installed","ua":"Вже встановлено","ru":"Уже установлено","es":"Ya instalado"}'
-    ["h_install_packages_configure_start"]='{"en":"Configuring","ua":"Налаштування","ru":"Настройка","es":"Configuracion"}'
+    ["h_install_packages_title"]='{"en":"Installing necessary packages and dependencies","ua":"Р’СЃС‚Р°РЅРѕРІР»РµРЅРЅСЏ РЅРµРѕР±С…С–РґРЅРёС… РїР°РєРµС‚С–РІ С‚Р° Р·Р°Р»РµР¶РЅРѕСЃС‚РµР№","ru":"РЈСЃС‚Р°РЅРѕРІРєР° РЅРµРѕР±С…РѕРґРёРјС‹С… РїР°РєРµС‚РѕРІ Рё Р·Р°РІРёСЃРёРјРѕСЃС‚РµР№","es":"Instalando paquetes y dependencias necesarios"}'
+    ["h_install_packages_start"]='{"en":"Installation","ua":"Р’СЃС‚Р°РЅРѕРІР»РµРЅРЅСЏ","ru":"РЈСЃС‚Р°РЅРѕРІРєР°","es":"InstalaciГіn"}'
+    ["h_install_packages_comlpete"]='{"en":"Installation successful","ua":"Р’СЃС‚Р°РЅРѕРІР»РµРЅРЅСЏ СѓСЃРїС–С€РЅРµ","ru":"РЈСЃС‚Р°РЅРѕРІРєР° СѓСЃРїРµС€РЅР°","es":"InstalaciГіn exitosa"}'
+    ["h_install_packages_already"]='{"en":"Already installed","ua":"Р’Р¶Рµ РІСЃС‚Р°РЅРѕРІР»РµРЅРѕ","ru":"РЈР¶Рµ СѓСЃС‚Р°РЅРѕРІР»РµРЅРѕ","es":"Ya instalado"}'
+    ["h_install_packages_configure_start"]='{"en":"Configuring","ua":"РќР°Р»Р°С€С‚СѓРІР°РЅРЅСЏ","ru":"РќР°СЃС‚СЂРѕР№РєР°","es":"ConfiguraciГіn"}'
 
-    ["h_install_packages_configure_complete"]='{"en":"Configuration completed","ua":"Налаштування завершено","ru":"Настройка завершена","es":"Configuracion completada"}'
+    ["h_install_packages_configure_complete"]='{"en":"Configuration completed","ua":"РќР°Р»Р°С€С‚СѓРІР°РЅРЅСЏ Р·Р°РІРµСЂС€РµРЅРѕ","ru":"РќР°СЃС‚СЂРѕР№РєР° Р·Р°РІРµСЂС€РµРЅР°","es":"ConfiguraciГіn completada"}'
 
-    ["h_create_mt_folder_title"]='{"en":"Creating a directory for installing MoonTrader","ua":"Створення каталогу для встановлення MoonTrader","ru":"Создание каталога для установки MoonTrader","es":"Creando un directorio para instalar MoonTrader"}'
-    ["h_create_mt_folder_already_exist"]='{"en":"Directory for installing MoonTrader already exists","ua":"Каталог для встановлення MoonTrader вже існує","ru":"Каталог для установки MoonTrader уже существует","es":"El directorio para instalar MoonTrader ya existe"}'
-    ["h_create_mt_folder_new"]='{"en":"Enter a new name for the directory","ua":"Введіть нову назву для каталогу","ru":"Введите новое имя для каталога","es":"Ingrese un nuevo nombre para el directorio"}'
-    ["h_create_mt_folder_install"]='{"en":"MoonTrader installation directory","ua":"Каталог встановлення MoonTrader","ru":"Установочный каталог MoonTrader","es":"Directorio de instalacion de MoonTrader"}'
+    ["h_create_mt_folder_title"]='{"en":"Creating a directory for installing MoonTrader","ua":"РЎС‚РІРѕСЂРµРЅРЅСЏ РєР°С‚Р°Р»РѕРіСѓ РґР»СЏ РІСЃС‚Р°РЅРѕРІР»РµРЅРЅСЏ MoonTrader","ru":"РЎРѕР·РґР°РЅРёРµ РєР°С‚Р°Р»РѕРіР° РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё MoonTrader","es":"Creando un directorio para instalar MoonTrader"}'
+    ["h_create_mt_folder_already_exist"]='{"en":"Directory for installing MoonTrader already exists","ua":"РљР°С‚Р°Р»РѕРі РґР»СЏ РІСЃС‚Р°РЅРѕРІР»РµРЅРЅСЏ MoonTrader РІР¶Рµ С–СЃРЅСѓС”","ru":"РљР°С‚Р°Р»РѕРі РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё MoonTrader СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚","es":"El directorio para instalar MoonTrader ya existe"}'
+    ["h_create_mt_folder_new"]='{"en":"Enter a new name for the directory","ua":"Р’РІРµРґС–С‚СЊ РЅРѕРІСѓ РЅР°Р·РІСѓ РґР»СЏ РєР°С‚Р°Р»РѕРіСѓ","ru":"Р’РІРµРґРёС‚Рµ РЅРѕРІРѕРµ РёРјСЏ РґР»СЏ РєР°С‚Р°Р»РѕРіР°","es":"Ingrese un nuevo nombre para el directorio"}'
+    ["h_create_mt_folder_install"]='{"en":"MoonTrader installation directory","ua":"РљР°С‚Р°Р»РѕРі РІСЃС‚Р°РЅРѕРІР»РµРЅРЅСЏ MoonTrader","ru":"РЈСЃС‚Р°РЅРѕРІРѕС‡РЅС‹Р№ РєР°С‚Р°Р»РѕРі MoonTrader","es":"Directorio de instalaciГіn de MoonTrader"}'
 
-    ["h_remove_packages_title"]='{"en":"Removing unnecessary packages and dependencies","ua":"Видалення непотрібних пакетів та залежностей","ru":"Удаление ненужных пакетов и зависимостей","es":"Eliminando paquetes y dependencias innecesarios"}'
-    ["h_remove_packages_start"]='{"en":"Removing","ua":"Видалення","ru":"Удаление","es":"Eliminando"}'
-    ["h_remove_packages_complete"]='{"en":"Successfully removed","ua":"Успішно видалено","ru":"Успешно удалено","es":"Eliminado exitosamente"}'
-    ["h_remove_packages_already"]='{"en":"Already removed","ua":"Вже видалено","ru":"Уже удалено","es":"Ya ha sido eliminado"}'
+    ["h_remove_packages_title"]='{"en":"Removing unnecessary packages and dependencies","ua":"Р’РёРґР°Р»РµРЅРЅСЏ РЅРµРїРѕС‚СЂС–Р±РЅРёС… РїР°РєРµС‚С–РІ С‚Р° Р·Р°Р»РµР¶РЅРѕСЃС‚РµР№","ru":"РЈРґР°Р»РµРЅРёРµ РЅРµРЅСѓР¶РЅС‹С… РїР°РєРµС‚РѕРІ Рё Р·Р°РІРёСЃРёРјРѕСЃС‚РµР№","es":"Eliminando paquetes y dependencias innecesarios"}'
+    ["h_remove_packages_start"]='{"en":"Removing","ua":"Р’РёРґР°Р»РµРЅРЅСЏ","ru":"РЈРґР°Р»РµРЅРёРµ","es":"Eliminando"}'
+    ["h_remove_packages_complete"]='{"en":"Successfully removed","ua":"РЈСЃРїС–С€РЅРѕ РІРёРґР°Р»РµРЅРѕ","ru":"РЈСЃРїРµС€РЅРѕ СѓРґР°Р»РµРЅРѕ","es":"Eliminado exitosamente"}'
+    ["h_remove_packages_already"]='{"en":"Already removed","ua":"Р’Р¶Рµ РІРёРґР°Р»РµРЅРѕ","ru":"РЈР¶Рµ СѓРґР°Р»РµРЅРѕ","es":"Ya ha sido eliminado"}'
 
-    ["h_update_packages_title"]='{"en":"Updating packages and dependencies","ua":"Оновлення пакетів та залежностей","ru":"Обновление пакетов и зависимостей","es":"Actualizando paquetes y dependencias"}'
-    ["h_update_packages_complete"]='{"en":"Packages and dependencies update completed","ua":"Оновлення пакетів та залежностей завершено","ru":"Обновление пакетов и зависимостей завершено","es":"Actualizacion de paquetes y dependencias completada"}'
+    ["h_update_packages_title"]='{"en":"Updating packages and dependencies","ua":"РћРЅРѕРІР»РµРЅРЅСЏ РїР°РєРµС‚С–РІ С‚Р° Р·Р°Р»РµР¶РЅРѕСЃС‚РµР№","ru":"РћР±РЅРѕРІР»РµРЅРёРµ РїР°РєРµС‚РѕРІ Рё Р·Р°РІРёСЃРёРјРѕСЃС‚РµР№","es":"Actualizando paquetes y dependencias"}'
+    ["h_update_packages_complete"]='{"en":"Packages and dependencies update completed","ua":"РћРЅРѕРІР»РµРЅРЅСЏ РїР°РєРµС‚С–РІ С‚Р° Р·Р°Р»РµР¶РЅРѕСЃС‚РµР№ Р·Р°РІРµСЂС€РµРЅРѕ","ru":"РћР±РЅРѕРІР»РµРЅРёРµ РїР°РєРµС‚РѕРІ Рё Р·Р°РІРёСЃРёРјРѕСЃС‚РµР№ Р·Р°РІРµСЂС€РµРЅРѕ","es":"ActualizaciГіn de paquetes y dependencias completada"}'
 
-    ["h_setup_firewall_execute"]='{"en":"Setting up the firewall","ua":"Налаштування брандмауера","ru":"Настройка брандмауэра","es":"Configuracion del firewall"}'
-    ["h_setup_firewall_complete"]='{"en""The firewall is configured, allowed","ua""Брандмауер налаштован, дозволено","ru""Брандмауэр настроен, разрешено","es""El firewall esta configurado, permitido"}'
-    ["h_setup_firewall_already"]='{"en""Firewall is already configured, allowed","ua""Брандмауер вже налаштовано, дозволено","ru""Брандмауэр уже настроен, разрешено","es""El firewall ya esta configurado, permitido"}'
+    ["h_setup_firewall_execute"]='{"en":"Setting up the firewall","ua":"РќР°Р»Р°С€С‚СѓРІР°РЅРЅСЏ Р±СЂР°РЅРґРјР°СѓРµСЂР°","ru":"РќР°СЃС‚СЂРѕР№РєР° Р±СЂР°РЅРґРјР°СѓСЌСЂР°","es":"ConfiguraciГіn del firewall"}'
+    ["h_setup_firewall_complete"]='{"en""The firewall is configured, allowed","ua""Р‘СЂР°РЅРґРјР°СѓРµСЂ РЅР°Р»Р°С€С‚РѕРІР°РЅ, РґРѕР·РІРѕР»РµРЅРѕ","ru""Р‘СЂР°РЅРґРјР°СѓСЌСЂ РЅР°СЃС‚СЂРѕРµРЅ, СЂР°Р·СЂРµС€РµРЅРѕ","es""El firewall estГЎ configurado, permitido"}'
+    ["h_setup_firewall_already"]='{"en""Firewall is already configured, allowed","ua""Р‘СЂР°РЅРґРјР°СѓРµСЂ РІР¶Рµ РЅР°Р»Р°С€С‚РѕРІР°РЅРѕ, РґРѕР·РІРѕР»РµРЅРѕ","ru""Р‘СЂР°РЅРґРјР°СѓСЌСЂ СѓР¶Рµ РЅР°СЃС‚СЂРѕРµРЅ, СЂР°Р·СЂРµС€РµРЅРѕ","es""El firewall ya estГЎ configurado, permitido"}'
 
-    ["h_install_title"]='{"en":"Installing MoonTrader trading terminal core","ua":"Встановлення ядра торгового терміналу MoonTrader","ru":"Установка ядра торгового терминала MoonTrader","es":"Instalando nucleo del terminal de trading de MoonTrader"}'
-    ["h_install_mt_execute"]='{"en":"Downloading, unpacking and installing the MoonTrader trading terminal core...","ua":"Завантаження, розпакування та встановлення ядра торгового терміналу MoonTrader...","ru":"Загрузка, распаковка и установка ядра торгового терминала MoonTrader...","es":"Descargando, descomprimiendo e instalando el nucleo del terminal de trading de MoonTrader..."}'
-    ["h_install_mt_complete"]='{"en":"Install, creation of startup script and quick launch link completed","ua":"Встановлення, створення скрипту запуску та посилання швидкого запуску завершено","ru":"Установка, создание скрипта запуска и ccылки быстрого запуска завершены","es":"Instalacion, creacion de script de inicio y enlace de inicio rapido completados"}'
+    ["h_install_title"]='{"en":"Installing MoonTrader trading terminal core","ua":"Р’СЃС‚Р°РЅРѕРІР»РµРЅРЅСЏ СЏРґСЂР° С‚РѕСЂРіРѕРІРѕРіРѕ С‚РµСЂРјС–РЅР°Р»Сѓ MoonTrader","ru":"РЈСЃС‚Р°РЅРѕРІРєР° СЏРґСЂР° С‚РѕСЂРіРѕРІРѕРіРѕ С‚РµСЂРјРёРЅР°Р»Р° MoonTrader","es":"Instalando nГєcleo del terminal de trading de MoonTrader"}'
+    ["h_install_mt_execute"]='{"en":"Downloading, unpacking and installing the MoonTrader trading terminal core...","ua":"Р—Р°РІР°РЅС‚Р°Р¶РµРЅРЅСЏ, СЂРѕР·РїР°РєСѓРІР°РЅРЅСЏ С‚Р° РІСЃС‚Р°РЅРѕРІР»РµРЅРЅСЏ СЏРґСЂР° С‚РѕСЂРіРѕРІРѕРіРѕ С‚РµСЂРјС–РЅР°Р»Сѓ MoonTrader...","ru":"Р—Р°РіСЂСѓР·РєР°, СЂР°СЃРїР°РєРѕРІРєР° Рё СѓСЃС‚Р°РЅРѕРІРєР° СЏРґСЂР° С‚РѕСЂРіРѕРІРѕРіРѕ С‚РµСЂРјРёРЅР°Р»Р° MoonTrader...","es":"Descargando, descomprimiendo e instalando el nГєcleo del terminal de trading de MoonTrader..."}'
+    ["h_install_mt_complete"]='{"en":"Install, creation of startup script and quick launch link completed","ua":"Р’СЃС‚Р°РЅРѕРІР»РµРЅРЅСЏ, СЃС‚РІРѕСЂРµРЅРЅСЏ СЃРєСЂРёРїС‚Сѓ Р·Р°РїСѓСЃРєСѓ С‚Р° РїРѕСЃРёР»Р°РЅРЅСЏ С€РІРёРґРєРѕРіРѕ Р·Р°РїСѓСЃРєСѓ Р·Р°РІРµСЂС€РµРЅРѕ","ru":"РЈСЃС‚Р°РЅРѕРІРєР°, СЃРѕР·РґР°РЅРёРµ СЃРєСЂРёРїС‚Р° Р·Р°РїСѓСЃРєР° Рё ccС‹Р»РєРё Р±С‹СЃС‚СЂРѕРіРѕ Р·Р°РїСѓСЃРєР° Р·Р°РІРµСЂС€РµРЅС‹","es":"InstalaciГіn, creaciГіn de script de inicio y enlace de inicio rГЎpido completados"}'
 
-    ["h_complete_install_title"]='{"en":"All installation operations completed successfully","ua":"Всі операції встановлення успішно завершені","ru":"Все операции установки успешно завершены","es":"Todas las operaciones de instalacion se han completado correctamente"}'
-    ["h_complete_install_waring"]='{"en":"Make sure to use tmux/screen to run the MoonTrader trading terminal in the background, otherwise, after disconnecting from SSH, the MTCore will also be forcibly closed.","ua":"Переконайтеся, що ви використовуєте tmux/screen для запуску торгового терміналу MoonTrader в фоновому режимі, інакше після відключення від SSH - MTCore також буде примусово закрито.","ru":"Убедитесь, что вы используете tmux/screen для запуска торгового терминала MoonTrader в фоновом режиме, иначе после отключения от SSH - MTCore также будет принудительно закрыт.","es":"Asegurese de usar tmux/screen para ejecutar el terminal de trading de MoonTrader en segundo plano, de lo contrario, despues de desconectarse de SSH, MTCore tambien se cerrara forzosamente."}'
+    ["h_complete_install_title"]='{"en":"All installation operations completed successfully","ua":"Р’СЃС– РѕРїРµСЂР°С†С–С— РІСЃС‚Р°РЅРѕРІР»РµРЅРЅСЏ СѓСЃРїС–С€РЅРѕ Р·Р°РІРµСЂС€РµРЅС–","ru":"Р’СЃРµ РѕРїРµСЂР°С†РёРё СѓСЃС‚Р°РЅРѕРІРєРё СѓСЃРїРµС€РЅРѕ Р·Р°РІРµСЂС€РµРЅС‹","es":"Todas las operaciones de instalaciГіn se han completado correctamente"}'
+    ["h_complete_install_waring"]='{"en":"Make sure to use tmux/screen to run the MoonTrader trading terminal in the background, otherwise, after disconnecting from SSH, the MTCore will also be forcibly closed.","ua":"РџРµСЂРµРєРѕРЅР°Р№С‚РµСЃСЏ, С‰Рѕ РІРё РІРёРєРѕСЂРёСЃС‚РѕРІСѓС”С‚Рµ tmux/screen РґР»СЏ Р·Р°РїСѓСЃРєСѓ С‚РѕСЂРіРѕРІРѕРіРѕ С‚РµСЂРјС–РЅР°Р»Сѓ MoonTrader РІ С„РѕРЅРѕРІРѕРјСѓ СЂРµР¶РёРјС–, С–РЅР°РєС€Рµ РїС–СЃР»СЏ РІС–РґРєР»СЋС‡РµРЅРЅСЏ РІС–Рґ SSH - MTCore С‚Р°РєРѕР¶ Р±СѓРґРµ РїСЂРёРјСѓСЃРѕРІРѕ Р·Р°РєСЂРёС‚Рѕ.","ru":"РЈР±РµРґРёС‚РµСЃСЊ, С‡С‚Рѕ РІС‹ РёСЃРїРѕР»СЊР·СѓРµС‚Рµ tmux/screen РґР»СЏ Р·Р°РїСѓСЃРєР° С‚РѕСЂРіРѕРІРѕРіРѕ С‚РµСЂРјРёРЅР°Р»Р° MoonTrader РІ С„РѕРЅРѕРІРѕРј СЂРµР¶РёРјРµ, РёРЅР°С‡Рµ РїРѕСЃР»Рµ РѕС‚РєР»СЋС‡РµРЅРёСЏ РѕС‚ SSH - MTCore С‚Р°РєР¶Рµ Р±СѓРґРµС‚ РїСЂРёРЅСѓРґРёС‚РµР»СЊРЅРѕ Р·Р°РєСЂС‹С‚.","es":"AsegГєrese de usar tmux/screen para ejecutar el terminal de trading de MoonTrader en segundo plano, de lo contrario, despuГ©s de desconectarse de SSH, MTCore tambiГ©n se cerrarГЎ forzosamente."}'
 
-    ["h_complete_install_info"]='{"en":"Full installation information","ua":"Повна інформація про встановлення","ru":"Полная информация об установке","es":"Informacion completa de instalacion"}'
-    ["h_complete_install_os"]='{"en":"Operating system","ua":"Операційна система","ru":"Операционная система","es":"Sistema operativo"}'
-    ["h_complete_install_user"]='{"en":"User for whom the installation was performed","ua":"Користувач, для якого проведено встановлення","ru":"Пользователь, для которого произведена установка","es":"Usuario para quien se realizo la instalacion"}'
-    ["h_complete_install_dir"]='{"en":"MoonTrader is installed in the directory","ua":"MoonTrader встановлено в каталог","ru":"MoonTrader установлен в каталог","es":"MoonTrader se ha instalado en el directorio"}'
-    ["h_complete_install_fail2ban"]='{"en":"Protection against password guessing has been set up based on Fail2Ban","ua":"Налаштован захист від перебору паролів на основі Fail2Ban","ru":"Настроена защита от перебора паролей на основе Fail2Ban","es":"Se ha configurado la proteccion contra adivinanza de contrasenas basada en Fail2Ban"}'
-    ["h_complete_install_start"]='{"en":"Command to start","ua":"Команда для запуску","ru":"Команда для запуска","es":"Comando para iniciar"}'
-    ["h_complete_install_reboot"]='{"en":"Press any key to apply all settings, the server will be restarted.","ua":"Для застосування всіх налаштувань натисніть будь-яку клавішу, сервер буде перезавантажено.","ru":"Для применения всех настроек нажмите любую клавишу, сервер будет перезагружен.","es":"Presione cualquier tecla para aplicar todas las configuraciones, el servidor se reiniciara."}'
-    ["h_complete_install_firewall"]='{"en":"Firewall enabled, allowed","ua":"Брандмауер увімкнено, дозволено","ru":"Брандмауэр включен, разрешено","es":"Firewall habilitado, permitido"}'
+    ["h_complete_install_info"]='{"en":"Full installation information","ua":"РџРѕРІРЅР° С–РЅС„РѕСЂРјР°С†С–СЏ РїСЂРѕ РІСЃС‚Р°РЅРѕРІР»РµРЅРЅСЏ","ru":"РџРѕР»РЅР°СЏ РёРЅС„РѕСЂРјР°С†РёСЏ РѕР± СѓСЃС‚Р°РЅРѕРІРєРµ","es":"InformaciГіn completa de instalaciГіn"}'
+    ["h_complete_install_os"]='{"en":"Operating system","ua":"РћРїРµСЂР°С†С–Р№РЅР° СЃРёСЃС‚РµРјР°","ru":"РћРїРµСЂР°С†РёРѕРЅРЅР°СЏ СЃРёСЃС‚РµРјР°","es":"Sistema operativo"}'
+    ["h_complete_install_user"]='{"en":"User for whom the installation was performed","ua":"РљРѕСЂРёСЃС‚СѓРІР°С‡, РґР»СЏ СЏРєРѕРіРѕ РїСЂРѕРІРµРґРµРЅРѕ РІСЃС‚Р°РЅРѕРІР»РµРЅРЅСЏ","ru":"РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ, РґР»СЏ РєРѕС‚РѕСЂРѕРіРѕ РїСЂРѕРёР·РІРµРґРµРЅР° СѓСЃС‚Р°РЅРѕРІРєР°","es":"Usuario para quien se realizГі la instalaciГіn"}'
+    ["h_complete_install_dir"]='{"en":"MoonTrader is installed in the directory","ua":"MoonTrader РІСЃС‚Р°РЅРѕРІР»РµРЅРѕ РІ РєР°С‚Р°Р»РѕРі","ru":"MoonTrader СѓСЃС‚Р°РЅРѕРІР»РµРЅ РІ РєР°С‚Р°Р»РѕРі","es":"MoonTrader se ha instalado en el directorio"}'
+    ["h_complete_install_fail2ban"]='{"en":"Protection against password guessing has been set up based on Fail2Ban","ua":"РќР°Р»Р°С€С‚РѕРІР°РЅ Р·Р°С…РёСЃС‚ РІС–Рґ РїРµСЂРµР±РѕСЂСѓ РїР°СЂРѕР»С–РІ РЅР° РѕСЃРЅРѕРІС– Fail2Ban","ru":"РќР°СЃС‚СЂРѕРµРЅР° Р·Р°С‰РёС‚Р° РѕС‚ РїРµСЂРµР±РѕСЂР° РїР°СЂРѕР»РµР№ РЅР° РѕСЃРЅРѕРІРµ Fail2Ban","es":"Se ha configurado la protecciГіn contra adivinanza de contraseГ±as basada en Fail2Ban"}'
+    ["h_complete_install_start"]='{"en":"Command to start","ua":"РљРѕРјР°РЅРґР° РґР»СЏ Р·Р°РїСѓСЃРєСѓ","ru":"РљРѕРјР°РЅРґР° РґР»СЏ Р·Р°РїСѓСЃРєР°","es":"Comando para iniciar"}'
+    ["h_complete_install_reboot"]='{"en":"Press any key to apply all settings, the server will be restarted.","ua":"Р”Р»СЏ Р·Р°СЃС‚РѕСЃСѓРІР°РЅРЅСЏ РІСЃС–С… РЅР°Р»Р°С€С‚СѓРІР°РЅСЊ РЅР°С‚РёСЃРЅС–С‚СЊ Р±СѓРґСЊ-СЏРєСѓ РєР»Р°РІС–С€Сѓ, СЃРµСЂРІРµСЂ Р±СѓРґРµ РїРµСЂРµР·Р°РІР°РЅС‚Р°Р¶РµРЅРѕ.","ru":"Р”Р»СЏ РїСЂРёРјРµРЅРµРЅРёСЏ РІСЃРµС… РЅР°СЃС‚СЂРѕРµРє РЅР°Р¶РјРёС‚Рµ Р»СЋР±СѓСЋ РєР»Р°РІРёС€Сѓ, СЃРµСЂРІРµСЂ Р±СѓРґРµС‚ РїРµСЂРµР·Р°РіСЂСѓР¶РµРЅ.","es":"Presione cualquier tecla para aplicar todas las configuraciones, el servidor se reiniciarГЎ."}'
+    ["h_complete_install_firewall"]='{"en":"Firewall enabled, allowed","ua":"Р‘СЂР°РЅРґРјР°СѓРµСЂ СѓРІС–РјРєРЅРµРЅРѕ, РґРѕР·РІРѕР»РµРЅРѕ","ru":"Р‘СЂР°РЅРґРјР°СѓСЌСЂ РІРєР»СЋС‡РµРЅ, СЂР°Р·СЂРµС€РµРЅРѕ","es":"Firewall habilitado, permitido"}'
 )
 
 # Function to select language
 select_language() {
     local selected_lang=1
-    local lang_list=("English" "Русский" "Українська" "Espanol")
+    local lang_list=("English" "Р СѓСЃСЃРєРёР№" "РЈРєСЂР°С—РЅСЃСЊРєР°" "EspaГ±ol")
 
     declare -A messages=(
         ["en"]="Select script language"
-        ["ru"]="Выберите язык скрипта"
-        ["ua"]="Виберіть мову скрипта"
+        ["ru"]="Р’С‹Р±РµСЂРёС‚Рµ СЏР·С‹Рє СЃРєСЂРёРїС‚Р°"
+        ["ua"]="Р’РёР±РµСЂС–С‚СЊ РјРѕРІСѓ СЃРєСЂРёРїС‚Р°"
         ["es"]="Seleccione el idioma del script"
     )
 
@@ -97,7 +97,7 @@ select_language() {
         echo
         for i in "${!lang_list[@]}"; do
             if [[ $selected_lang -eq $((i + 1)) ]]; then
-                echo "$((i + 1))) [?] ${lang_list[$i]}"
+                echo "$((i + 1))) [вњ”] ${lang_list[$i]}"
             else
                 echo "$((i + 1))) [ ] ${lang_list[$i]}"
             fi
@@ -124,19 +124,19 @@ select_language() {
     done
 }
 
-# Функция для отображения подсказки для переменной на указанном языке
+# Р¤СѓРЅРєС†РёСЏ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РїРµСЂРµРјРµРЅРЅРѕР№ РЅР° СѓРєР°Р·Р°РЅРЅРѕРј СЏР·С‹РєРµ
 function extract_tips() {
     local var_name="$1"
 
-    # если lang не задан, то по умолчанию en
+    # РµСЃР»Рё lang РЅРµ Р·Р°РґР°РЅ, С‚Рѕ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ en
     if [ -z "$SCRIPT_LANG" ]; then
         SCRIPT_LANG="en"
     fi
 
-    # Получить подсказку для переменной на указанном языке
+    # РџРѕР»СѓС‡РёС‚СЊ РїРѕРґСЃРєР°Р·РєСѓ РґР»СЏ РїРµСЂРµРјРµРЅРЅРѕР№ РЅР° СѓРєР°Р·Р°РЅРЅРѕРј СЏР·С‹РєРµ
     local hint=$(echo "${tips[$var_name]}" | awk -F'"' -v l="$SCRIPT_LANG" '{for(i=2;i<=NF;i+=4)if($i==l)print $(i+2)}')
 
-    # Распечатать подсказку, если она не пуста
+    # Р Р°СЃРїРµС‡Р°С‚Р°С‚СЊ РїРѕРґСЃРєР°Р·РєСѓ, РµСЃР»Рё РѕРЅР° РЅРµ РїСѓСЃС‚Р°
     if [ -n "$hint" ]; then
         echo "$hint"
     else
@@ -144,23 +144,23 @@ function extract_tips() {
     fi
 }
 
-# Функции для логирования
+# Р¤СѓРЅРєС†РёРё РґР»СЏ Р»РѕРіРёСЂРѕРІР°РЅРёСЏ
 function log {
     local message_type="$1"
     local message="$2"
 
-    local color_info="\e[34m"    # Синий
-    local color_warning="\e[33m" # Желтый
-    local color_error="\e[31m"   # Красный
+    local color_info="\e[34m"    # РЎРёРЅРёР№
+    local color_warning="\e[33m" # Р–РµР»С‚С‹Р№
+    local color_error="\e[31m"   # РљСЂР°СЃРЅС‹Р№
 
-    local color_help="\e[36m"      # Бирюзовый (Циан)
-    local color_execution="\e[35m" # Пурпурный
-    local color_success="\e[32m"   # Зеленый
-    local color_example="\e[90m"   # Серый (темный)
-    local color_hint="\e[94m"      # Светло-синий
-    local color_select="\e[92m"    # Светло-зеленый
+    local color_help="\e[36m"      # Р‘РёСЂСЋР·РѕРІС‹Р№ (Р¦РёР°РЅ)
+    local color_execution="\e[35m" # РџСѓСЂРїСѓСЂРЅС‹Р№
+    local color_success="\e[32m"   # Р—РµР»РµРЅС‹Р№
+    local color_example="\e[90m"   # РЎРµСЂС‹Р№ (С‚РµРјРЅС‹Р№)
+    local color_hint="\e[94m"      # РЎРІРµС‚Р»Рѕ-СЃРёРЅРёР№
+    local color_select="\e[92m"    # РЎРІРµС‚Р»Рѕ-Р·РµР»РµРЅС‹Р№
 
-    local color_reset="\e[0m" # Сброс всех цветовых настроек
+    local color_reset="\e[0m" # РЎР±СЂРѕСЃ РІСЃРµС… С†РІРµС‚РѕРІС‹С… РЅР°СЃС‚СЂРѕРµРє
 
     case $message_type in
     "execution")
@@ -197,7 +197,18 @@ function log {
     esac
 }
 
-# Функция проверки на запуск от root
+
+function check_arch() {
+    if [ "$(uname -m)" == "x86_64" ]; then
+        CPU_ARCH="AMD64"
+    elif [ "$(uname -m)" == "aarch64" ]; then
+        CPU_ARCH="ARM"
+    else
+        log error "$(extract_tips "h_check_arch_wrong")"
+    fi
+}
+
+# Р¤СѓРЅРєС†РёСЏ РїСЂРѕРІРµСЂРєРё РЅР° Р·Р°РїСѓСЃРє РѕС‚ root
 function check_root {
     local os=$(check_os)
 
@@ -274,11 +285,11 @@ setup_install() {
         log select "$(extract_tips "h_setup_install_text")"
         echo
         if [[ $selected_option -eq 1 ]]; then
-            echo "1) [?] Automatic"
+            echo "1) [вњ”] Automatic"
             echo "2) [ ] Custom"
         else
             echo "1) [ ] Automatic "
-            echo "2) [?] Custom"
+            echo "2) [вњ”] Custom"
         fi
         echo
         log select "$(extract_tips "h_setup_tips")"
@@ -316,29 +327,29 @@ setup_custom() {
         log select "$(extract_tips "h_custom_setup_request")"
         echo
         if [[ $custom_link_choice -eq 0 ]]; then
-            echo "1) [?] MT Link: Official"
+            echo "1) [вњ”] MT Link: Official"
             echo "2) [ ] MT Link: Dropbox"
         else
             echo "1) [ ] MT Link: Official"
-            echo "2) [?] MT Link: Dropbox"
+            echo "2) [вњ”] MT Link: Dropbox"
         fi
         if [[ $time_choice -eq 1 ]]; then
-            echo "3) [?] Setup Time(chrony)"
+            echo "3) [вњ”] Setup Time(chrony)"
         else
             echo "3) [ ] Setup Time(chrony)"
         fi
         if [[ $firewall_choice -eq 1 ]]; then
-            echo "4) [?] Setup Firewall"
+            echo "4) [вњ”] Setup Firewall"
         else
             echo "4) [ ] Setup Firewall"
         fi
         if [[ $fil2ban_choice -eq 1 ]]; then
-            echo "5) [?] Setup Fail2Ban"
+            echo "5) [вњ”] Setup Fail2Ban"
         else
             echo "5) [ ] Setup Fail2Ban"
         fi
         if [[ $defender_choice -eq 1 ]]; then
-            echo "6) [?] Setup MT Guardian"
+            echo "6) [вњ”] Setup MT Guardian"
         else
             echo "6) [ ] Setup MT Guardian"
         fi
@@ -364,7 +375,7 @@ setup_custom() {
     SETUP_MT_GUARDIAN=$((defender_choice))
 }
 
-# Функция включения swap, если не включен
+# Р¤СѓРЅРєС†РёСЏ РІРєР»СЋС‡РµРЅРёСЏ swap, РµСЃР»Рё РЅРµ РІРєР»СЋС‡РµРЅ
 function enable_swap() {
     log execution "$(extract_tips "h_install_packages_start"): Swap"
     if ! free | awk '/^Swap:/ {exit !$2}'; then
@@ -420,7 +431,7 @@ install_package() {
     fi
 }
 
-# Функция обновления пакетов и зависимостей
+# Р¤СѓРЅРєС†РёСЏ РѕР±РЅРѕРІР»РµРЅРёСЏ РїР°РєРµС‚РѕРІ Рё Р·Р°РІРёСЃРёРјРѕСЃС‚РµР№
 function update_packages() {
     log execution "$(extract_tips "h_update_packages_title")..."
     apt update || log error "Error: Failed to update package lists."
@@ -428,7 +439,7 @@ function update_packages() {
     log success "$(extract_tips "h_update_packages_complete")"
 }
 
-# Функция удаления ненужных пакетов и зависимостей
+# Р¤СѓРЅРєС†РёСЏ СѓРґР°Р»РµРЅРёСЏ РЅРµРЅСѓР¶РЅС‹С… РїР°РєРµС‚РѕРІ Рё Р·Р°РІРёСЃРёРјРѕСЃС‚РµР№
 function remove_packages() {
     local rm_pkgs=(snapd exim exim4)
 
